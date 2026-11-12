@@ -1,0 +1,2 @@
+# KubeAssist--Enterprise-Ready-AI-Assistant-for-Kubernetes-Documentation-and-Operations
+KubeAssist is a production-ready AI orchestration platform built for reliable LLM applications, featuring data ingestion and processing, an LLM Gateway with integrated guardrails, intelligent planning for retrieval and context-memory decisions, Agentic RAG, embedding and model failover, response caching, and automated evaluation pipelines.
