@@ -22,7 +22,7 @@ Ask a Kubernetes question and get an answer grounded in a curated document knowl
 </div>
 
 <!-- Add a screenshot of the UI here once you have one:
-![KubeAssist UI](docs/images/ui_screenshot.png) -->
+![KubeAssist UI](images/ui_screenshot.png) -->
 
 ---
 
@@ -78,7 +78,7 @@ All model and embedding workloads are hosted, so no local LLM or GPU is required
 
 ## System Architecture
 
-![KubeAssist Architecture](docs/images/01_system_architecture.png)
+![KubeAssist Architecture](images/01_system_architecture.png)
 
 | Layer | Component | Responsibility |
 |---|---|---|
@@ -101,7 +101,7 @@ All model and embedding workloads are hosted, so no local LLM or GPU is required
 
 ## Runtime Request Flow
 
-![Runtime Flow](docs/images/02_runtime_request_flow.png)
+![Runtime Flow](images/02_runtime_request_flow.png)
 
 1. **Frontend request.** Streamlit keeps a session-scoped UUID and sends `{"q": "...", "thread_id": "..."}` to `POST /query`.
 2. **Validation.** A Pydantic `QueryRequest` enforces `q` (1–10,000 chars) and `thread_id` (1–256 chars). The endpoint trims both and rejects empty values with HTTP 400.
@@ -126,7 +126,7 @@ A guardrail-handled request is a handled application response, not an HTTP error
 
 ## Document Ingestion
 
-![Ingestion Pipeline](docs/images/03_document_ingestion.png)
+![Ingestion Pipeline](images/03_document_ingestion.png)
 
 Ingestion is a separate, offline workflow. It does not run per query or on API startup. It scans a folder, picks a loader by extension, extracts text, chunks it, saves processed JSON, embeds the chunks with Jina, and indexes vectors and payloads into Qdrant.
 
@@ -143,7 +143,7 @@ The observed collection name is `kubeassist_knowledge` with 1024-dimension vecto
 
 ## Retrieval and Generation
 
-![RAG Pipeline](docs/images/04_retrieval_and_generation.png)
+![RAG Pipeline](images/04_retrieval_and_generation.png)
 
 Retrieval is split into two stages so each can do what it is best at:
 
@@ -157,7 +157,7 @@ One observed runtime request retrieved **15** candidates and reranked them to **
 
 ## Deployment and Evaluation
 
-![Deployment](docs/images/05_deployment_observability_evaluation.png)
+![Deployment](images/05_deployment_observability_evaluation.png)
 
 The frontend and backend run as separate Render services. Logfire provides telemetry across the whole request path, and a RAGAS workflow scores answer and retrieval quality. Details are in [Evaluation](#evaluation), [Deploying to Render](#deploying-to-render) and [Observability and troubleshooting](#observability-and-troubleshooting).
 
@@ -491,7 +491,7 @@ KubeAssist/
 │   ├── score_ragas.py
 │   └── results/ragas_scores.csv
 ├── Data/                           # true_data/, noisy_data/
-├── docs/images/                    # Architecture diagrams used in this README
+├── images/                    # Architecture diagrams used in this README
 ├── processed_data/
 ├── requirements.txt
 ├── requirements-render.txt
