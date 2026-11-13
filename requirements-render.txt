@@ -1,0 +1,40 @@
+
+# KubeAssist - Render Runtime
+
+# API and frontend
+fastapi
+uvicorn[standard]
+streamlit
+python-dotenv
+pydantic>=2.0
+
+# HTTP
+requests
+httpx
+
+# LangChain and LangGraph
+langchain
+langchain-core
+langchain-openai
+langchain-text-splitters
+langgraph
+
+# Portkey
+portkey-ai
+
+# Vector database
+qdrant-client
+
+# Numerical processing
+numpy
+
+# Observability
+logfire[fastapi,requests]
+
+# Document parsing (retain if runtime ingestion is required)
+beautifulsoup4
+pypdf
+pdfplumber
+unstructured
+python-docx
+python-pptx
