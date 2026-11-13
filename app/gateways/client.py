@@ -22,6 +22,7 @@ SUPPORTED_FEATURES = {
     "responder",
     "guardrails",
     "rag",
+    "ragas_evaluation",
 }
 
 

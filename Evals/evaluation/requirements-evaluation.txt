@@ -1,0 +1,5 @@
+# Evaluation-only dependencies. Keep these separate from production requirements.
+ragas==0.2.15
+datasets>=2.19,<4
+pandas>=2.2,<3
+requests>=2.31

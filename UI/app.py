@@ -64,8 +64,17 @@ st.set_page_config(
 AI_AVATAR = "🤖"
 USER_AVATAR = "👤"
 
+# Render private networking provides the backend host and port.
+# BACKEND_URL remains supported for local development or overrides.
+BACKEND_HOSTPORT = os.getenv("BACKEND_HOSTPORT")
+
 BACKEND_URL = (
-    os.getenv("BACKEND_URL") or "http://localhost:8000"
+    os.getenv("BACKEND_URL")
+    or (
+        f"http://{BACKEND_HOSTPORT}"
+        if BACKEND_HOSTPORT
+        else "http://localhost:8000"
+    )
 ).strip().rstrip("/")
 
 REQUEST_TIMEOUT = 120

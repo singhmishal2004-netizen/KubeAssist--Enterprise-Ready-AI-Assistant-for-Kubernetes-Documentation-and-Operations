@@ -1,0 +1,498 @@
+[
+  {
+    "id": "k8s_arch_001",
+    "user_input": "What is Kubernetes, and what was it designed to do?",
+    "reference": "The source describes Kubernetes (K8s) as an open-source container scheduler that grew out of Google's experience with Borg and Omega. It was designed as a loosely coupled collection of components for deploying, maintaining, and scaling applications.",
+    "reference_contexts": [
+      "Kubernetes or K8s was a project spun out of Google as an open source next-generation container scheduler, designed with lessons learned from developing and managing Borg and Omega. Kubernetes was designed as a loosely coupled collection of components centered around deploying, maintaining, and scaling applications."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture",
+      "source_version_note": "The presentation identifies Kubernetes v1.8; use its terminology as source material, not as current-version guidance."
+    }
+  },
+  {
+    "id": "k8s_arch_002",
+    "user_input": "What does Kubernetes abstract away from an application?",
+    "reference": "The presentation says Kubernetes abstracts the underlying hardware of cluster nodes and provides a uniform interface for applications to be deployed and to consume a shared pool of resources.",
+    "reference_contexts": [
+      "Kubernetes abstracts away the underlying hardware of the nodes and provides a uniform interface for applications to be both deployed and consume the shared pool of resources."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_003",
+    "user_input": "What are the responsibilities of the Kubernetes master and worker nodes in the architecture described?",
+    "reference": "The master acts as the primary control plane and runs core components such as the API server, scheduler, and cluster controller; it commonly manages cluster state and cloud-provider components. Worker nodes execute workloads assigned by the master and run a minimal node agent.",
+    "reference_contexts": [
+      "Masters act as the primary control plane and are responsible at a minimum for running the API Server, scheduler, and cluster controller. They commonly also manage storing cluster state, cloud-provider-specific components, and other cluster-essential services. Nodes are the workers of a Kubernetes cluster. They run a minimal agent that manages the node itself and execute workloads as designated by the master."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_004",
+    "user_input": "What is the role of kube-apiserver?",
+    "reference": "The kube-apiserver exposes a REST interface to the Kubernetes control plane and datastore. Clients such as nodes, users, and applications interact with Kubernetes through it. It handles authentication, authorization, request validation and mutation, and admission control.",
+    "reference_contexts": [
+      "The apiserver provides a forward-facing REST interface into the Kubernetes control plane and datastore. All clients, including nodes, users, and other applications, interact with Kubernetes strictly through the API Server. It handles authentication and authorization, request validation, mutation, and admission control."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_005",
+    "user_input": "What information does etcd store in a Kubernetes cluster?",
+    "reference": "The presentation identifies etcd as the cluster datastore: a strongly consistent, highly available key-value store used to persist cluster state.",
+    "reference_contexts": [
+      "Etcd acts as the cluster datastore, providing a strong, consistent, and highly available key-value store used for persisting cluster state."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_006",
+    "user_input": "How does kube-controller-manager help maintain the desired cluster state?",
+    "reference": "The kube-controller-manager manages core control loops. It monitors cluster state through the API server and steers the cluster toward the desired state.",
+    "reference_contexts": [
+      "The controller-manager is the primary daemon that manages all core component control loops. It monitors the cluster state via the apiserver and steers the cluster towards the desired state."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_007",
+    "user_input": "What does the Kubernetes scheduler consider when placing a workload?",
+    "reference": "The scheduler evaluates workload requirements and attempts to place the workload on a matching resource. The presentation lists hardware requirements, affinity, anti-affinity, and custom resource requirements as examples.",
+    "reference_contexts": [
+      "Kube-scheduler is a policy-rich engine that evaluates workload requirements and attempts to place it on a matching resource. Requirements can include general hardware requirements, affinity, anti-affinity, and other custom resource requirements."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_008",
+    "user_input": "What is the kubelet responsible for on a Kubernetes node?",
+    "reference": "The kubelet is the node agent responsible for managing the Pod lifecycle on its host. The presentation says it can obtain container manifests from a file path, an HTTP endpoint, an etcd watch, or an HTTP server mode.",
+    "reference_contexts": [
+      "Kubelet acts as the node agent responsible for managing pod lifecycle on its host. It understands YAML container manifests that it can read from several sources: file path, HTTP endpoint, etcd watch, or HTTP server mode accepting manifests over a simple API."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture"
+    }
+  },
+  {
+    "id": "k8s_arch_009",
+    "user_input": "What does kube-proxy do?",
+    "reference": "The presentation describes kube-proxy as managing network rules on each node and forwarding connections or load-balancing traffic for Kubernetes Services. It lists userspace, iptables, and IPVS (then alpha in Kubernetes 1.8) as proxy modes.",
+    "reference_contexts": [
+      "Kube-proxy manages the network rules on each node and performs connection forwarding or load balancing for Kubernetes cluster services. Available proxy modes listed in the presentation are userspace, iptables, and ipvs (alpha in 1.8)."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture",
+      "source_version_note": "Proxy-mode availability is described in a Kubernetes v1.8 presentation and may be version-specific."
+    }
+  },
+  {
+    "id": "k8s_arch_010",
+    "user_input": "What is the purpose of a Kubernetes container runtime?",
+    "reference": "A container runtime is a CRI-compatible application that executes and manages containers. The presentation lists containerd, CRI-O, rkt, Kata, and Virtlet as examples in its historical context.",
+    "reference_contexts": [
+      "With respect to Kubernetes, a container runtime is a CRI (Container Runtime Interface) compatible application that executes and manages containers. The presentation lists Containerd (docker), Cri-o, Rkt, Kata, and Virtlet."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_architecture",
+      "source_version_note": "The examples reflect the presentation's Kubernetes v1.8-era content and should not be treated as a current supported-runtime list."
+    }
+  },
+  {
+    "id": "k8s_arch_011",
+    "user_input": "What networking rules does the Kubernetes architecture presentation specify for Pods and nodes?",
+    "reference": "It specifies that all Pods can communicate with all other Pods without NAT, all nodes can communicate with all Pods and vice versa without NAT, and the IP a Pod sees for itself is the same IP others see for it.",
+    "reference_contexts": [
+      "All Pods can communicate with all other Pods without NAT. All nodes can communicate with all Pods (and vice versa) without NAT. The IP that a Pod sees itself as is the same IP that others see it as."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_networking"
+    }
+  },
+  {
+    "id": "k8s_arch_012",
+    "user_input": "How do containers inside the same Pod communicate, according to the presentation?",
+    "reference": "Containers in a Pod share the same network namespace and IP address, so they can communicate with one another over localhost.",
+    "reference_contexts": [
+      "Containers in a pod exist within the same network namespace and share an IP, allowing for intra-pod communication over localhost."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_networking"
+    }
+  },
+  {
+    "id": "k8s_arch_013",
+    "user_input": "What is the role of the Container Network Interface (CNI) in Kubernetes?",
+    "reference": "The presentation describes CNI as the interface between a container runtime and a network implementation plugin; Kubernetes networking is plumbed through this interface.",
+    "reference_contexts": [
+      "Networking within Kubernetes is plumbed via the Container Network Interface (CNI), an interface between a container runtime and a network implementation plugin."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_networking"
+    }
+  },
+  {
+    "id": "k8s_arch_014",
+    "user_input": "How does a Kubernetes Service differ from a Pod IP in the architecture presentation?",
+    "reference": "Pods receive cluster-unique IP addresses for the duration of their lifecycle, but Pods are ephemeral. Services receive persistent cluster-unique IP addresses that span the lifecycle of the Pods behind them.",
+    "reference_contexts": [
+      "Pods are given a cluster-unique IP for the duration of their lifecycle, but the Pods themselves are fundamentally ephemeral. Services are given a persistent cluster-unique IP that spans the Pods' lifecycle."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_networking"
+    }
+  },
+  {
+    "id": "k8s_arch_015",
+    "user_input": "What is the difference between a Kubernetes label and annotation?",
+    "reference": "Labels are key-value pairs used to identify, describe, and group related objects, and they have strict syntax constraints. Annotations are key-value metadata that is not used for identification and can contain structured or unstructured information with fewer syntax limitations.",
+    "reference_contexts": [
+      "Label: key-value pairs used to identify, describe, and group related sets of objects; labels have strict syntax and character-set rules. Annotation: key-value pairs containing non-identifying information or metadata; annotations can contain structured or unstructured data."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_core_concepts"
+    }
+  },
+  {
+    "id": "k8s_arch_016",
+    "user_input": "What is a Kubernetes Pod according to the architecture presentation?",
+    "reference": "A Pod is the smallest unit of work or management resource in Kubernetes. It contains one or more containers that share storage, networking, and context.",
+    "reference_contexts": [
+      "A pod is the smallest unit of work or management resource within Kubernetes. It is comprised of one or more containers that share their storage, network, and context (namespace, cgroups, etc.)."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_workloads"
+    }
+  },
+  {
+    "id": "k8s_arch_017",
+    "user_input": "How does a Deployment relate to ReplicaSets?",
+    "reference": "The presentation describes a Deployment as a declarative way to manage stateless Pods and ReplicaSets. A Deployment's configuration specifies how updates are managed and includes the Pod template used to generate a ReplicaSet; it also provides rollback and granular update controls.",
+    "reference_contexts": [
+      "Deployment is a declarative method of managing stateless Pods and ReplicaSets. It provides rollback functionality and more granular update control. The Deployment contains configuration for how updates are managed and the Pod template used to generate the ReplicaSet."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_workloads"
+    }
+  },
+  {
+    "id": "k8s_arch_018",
+    "user_input": "When would a StatefulSet be used instead of a Deployment?",
+    "reference": "The presentation says a StatefulSet is tailored to Pods that must persist or maintain state. It preserves Pod identity, including hostname, network, and storage, and describes unique ordinal Pod names and persistent volumes created from volumeClaimTemplates.",
+    "reference_contexts": [
+      "StatefulSet is a controller tailored to managing Pods that must persist or maintain state. Pod identity including hostname, network, and storage will be persisted. Pods receive unique ordinal names using the StatefulSet name and ordinal index, and independent persistent volumes are created based on volumeClaimTemplates."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_workloads"
+    }
+  },
+  {
+    "id": "k8s_arch_019",
+    "user_input": "What does a DaemonSet ensure?",
+    "reference": "A DaemonSet ensures that each node matching specified criteria runs an instance of a supplied Pod. The presentation gives cluster-wide services such as log forwarding and health monitoring as use cases.",
+    "reference_contexts": [
+      "DaemonSet ensures that all nodes matching certain criteria will run an instance of a supplied Pod. It is ideal for cluster-wide services such as log forwarding or health monitoring."
+    ],
+    "metadata": {
+      "source": "architecture.pptx",
+      "category": "kubernetes_workloads"
+    }
+  },
+  {
+    "id": "k8s_jobs_001",
+    "user_input": "What is a Kubernetes Job, and how does it differ from a long-running workload?",
+    "reference": "A Kubernetes Job manages finite work that should run to completion. It creates one or more Pods and ensures they successfully terminate, making it suitable for batch processes and one-time tasks rather than services intended to run indefinitely.",
+    "reference_contexts": [
+      "A Kubernetes Job is a resource designed to run finite workloads that execute a task to completion. Unlike Pods created via Deployments, which run indefinitely, a Job ensures that its associated Pods complete their task and then exit successfully.",
+      "A Kubernetes Job is a controller that creates one or more Pods and ensures they successfully terminate. Jobs are useful for batch processes, one-time tasks, or any task that should run to completion rather than indefinitely."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx; monitor_job.docx",
+      "category": "kubernetes_jobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_002",
+    "user_input": "Which Pod restart policies are allowed for Kubernetes Jobs in the Jobs and CronJobs guide?",
+    "reference": "The guide lists OnFailure and Never as the allowed restart policies. With OnFailure, kubelet restarts the container in the same Pod; with Never, the failed Pod is marked failed and the Job controller creates another Pod. Always is not allowed because it would prevent the Job from completing.",
+    "reference_contexts": [
+      "Jobs have strict requirements for Pod restart policies: OnFailure restarts the container within the same Pod if it crashes; Never marks the entire Pod as failed and the Job controller creates a new Pod; Always is not allowed because it would prevent the Pod from ever completing."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_jobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_003",
+    "user_input": "What do the completions and parallelism fields control in a Kubernetes Job?",
+    "reference": "The completions field specifies how many Pods must successfully complete. The parallelism field controls the maximum number of Pods that can run concurrently.",
+    "reference_contexts": [
+      "Completions specifies the number of Pods that must successfully complete. Parallelism controls the maximum concurrent Pods."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_jobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_004",
+    "user_input": "What is the difference between NonIndexed and Indexed Job completion modes in the supplied guide?",
+    "reference": "In NonIndexed mode, all Pods are identical. In Indexed mode, each Pod receives a unique completion index, which can be used to process a specific data slice.",
+    "reference_contexts": [
+      "NonIndexed (the default): all Pods are identical. Indexed mode: each Pod gets a unique completion index. The example uses the JOB_COMPLETION_INDEX environment variable to process a specific data slice."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_jobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_005",
+    "user_input": "What is a Kubernetes CronJob?",
+    "reference": "A CronJob is a wrapper around Jobs that schedules Job creation using a cron-format schedule.",
+    "reference_contexts": [
+      "A CronJob is a thin wrapper around Jobs that enables scheduling. It creates Job objects automatically based on a defined schedule using the familiar cron format."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_cronjobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_006",
+    "user_input": "What does the CronJob schedule expression 30 2 * * * mean?",
+    "reference": "The guide gives 30 2 * * * as an example of a schedule that runs daily at 2:30 AM.",
+    "reference_contexts": [
+      "Common schedule examples: schedule: \"30 2 * * *\" means daily at 2:30 AM."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_cronjobs"
+    }
+  },
+  {
+    "id": "k8s_jobs_008",
+    "user_input": "Which fields in the CronJob example control how many successful and failed Job histories are retained?",
+    "reference": "The example uses successfulJobsHistoryLimit for successful Job history and failedJobsHistoryLimit for failed Job history. The shown values are 3 and 5, respectively.",
+    "reference_contexts": [
+      "The CronJob example specifies successfulJobsHistoryLimit: 3 and failedJobsHistoryLimit: 5."
+    ],
+    "metadata": {
+      "source": "cronjobs.docx",
+      "category": "kubernetes_cronjobs"
+    }
+  },
+  {
+    "id": "k8s_monitor_001",
+    "user_input": "How do you check the status of Kubernetes Jobs from the command line?",
+    "reference": "Use kubectl get jobs. The output includes the Job name, completions, duration, and age. A 0/1 completion count can mean the Job is still running or has failed, so the guide recommends waiting and checking again.",
+    "reference_contexts": [
+      "The guide uses kubectl get jobs to monitor Job status. Its example output includes NAME, COMPLETIONS, DURATION, and AGE. If a Job shows 0/1 under COMPLETIONS, it might still be running or has failed; wait a few seconds and run the command again."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_monitoring"
+    }
+  },
+  {
+    "id": "k8s_monitor_002",
+    "user_input": "What information does kubectl describe job provide when troubleshooting a Job?",
+    "reference": "The guide says kubectl describe job provides labels and annotations, selector details, parallelism and completion requirements, Pod statuses, and related events. It recommends checking the Events section.",
+    "reference_contexts": [
+      "kubectl describe job provides labels and annotations, selector details, parallelism and completion requirements, Pod statuses, and events related to the Job. The guide says to look at the Events section for events such as Pod creation and completion."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_monitoring"
+    }
+  },
+  {
+    "id": "k8s_monitor_003",
+    "user_input": "How can I find the Pods created by a particular Kubernetes Job?",
+    "reference": "The guide suggests listing Pods with labels using kubectl get pods --show-labels, or filtering by the Job name with kubectl get pods -l job-name=<job-name>.",
+    "reference_contexts": [
+      "The guide says Job Pods have labels such as job-name=hello-job. It shows kubectl get pods --show-labels and kubectl get pods -l job-name=hello-job to list Pods belonging to a Job."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_monitoring"
+    }
+  },
+  {
+    "id": "k8s_monitor_004",
+    "user_input": "How do you retrieve logs from a Kubernetes Job Pod?",
+    "reference": "First identify the Pod created by the Job, then run kubectl logs <pod-name>. The guide also shows filtering Pods by the job-name label before retrieving logs.",
+    "reference_contexts": [
+      "After identifying the Pod name, use kubectl logs <pod-name> to view its logs. The guide shows kubectl get pods -l job-name=hello-job as a way to find Pods belonging to the Job."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_monitoring"
+    }
+  },
+  {
+    "id": "k8s_monitor_005",
+    "user_input": "How can I follow the logs of a running Job in real time?",
+    "reference": "Use kubectl logs -f <pod-name>. The guide says this is useful for longer-running Jobs because it displays log output as it happens.",
+    "reference_contexts": [
+      "To follow logs in real time, use kubectl logs -f <pod-name>. This is particularly useful for longer-running jobs where you want to see output as it happens."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_monitoring"
+    }
+  },
+  {
+    "id": "k8s_monitor_006",
+    "user_input": "How does the monitoring tutorial suggest investigating a failed Kubernetes Job?",
+    "reference": "The tutorial creates a Job whose command exits with status code 1, checks the Job with kubectl get jobs, lists its Pods using the job-name label, and inspects a failed Pod's logs with kubectl logs. The logs reveal the command output before failure.",
+    "reference_contexts": [
+      "The failed-job example runs a command that prints \"Attempting task...\" and then exits with status code 1. The tutorial checks the Job with kubectl get jobs failed-job, lists its Pods with kubectl get pods -l job-name=failed-job, and inspects a failed Pod using kubectl logs <failed-pod-name>. The logs show the task started and then exited with an error code."
+    ],
+    "metadata": {
+      "source": "monitor_job.docx",
+      "category": "kubernetes_job_troubleshooting"
+    }
+  },
+  {
+    "id": "k8s_queue_001",
+    "user_input": "How does the fine parallel processing work-queue example distribute work across Kubernetes Job Pods?",
+    "reference": "The example uses Redis as a task queue. Each Pod picks up one work item, processes it, and repeats until the queue is empty. The Job runs multiple worker Pods in parallel.",
+    "reference_contexts": [
+      "In this example, a Kubernetes Job runs multiple parallel tasks as worker processes, each running as a separate Pod. As each Pod is created, it picks up one unit of work from a task queue, processes it, and repeats until the end of the queue is reached. Redis is used to hold the work queue."
+    ],
+    "metadata": {
+      "source": "parallel_work_queue.txt",
+      "category": "kubernetes_jobs_parallelism"
+    }
+  },
+  {
+    "id": "k8s_queue_002",
+    "user_input": "What is Redis used for in the Kubernetes parallel work-queue example?",
+    "reference": "Redis provides storage for the work queue. The example starts Redis, creates a queue named job2, and pushes task messages into it for worker Pods to consume.",
+    "reference_contexts": [
+      "The example starts a storage service to hold the work queue using Redis. It creates a queue named job2 and fills it with messages such as apple, banana, cherry, date, fig, grape, lemon, melon, and orange."
+    ],
+    "metadata": {
+      "source": "parallel_work_queue.txt",
+      "category": "kubernetes_jobs_parallelism"
+    }
+  },
+  {
+    "id": "k8s_queue_003",
+    "user_input": "What do the lease and complete operations do in the supplied Redis worker example?",
+    "reference": "The worker calls lease to obtain a queue item, processes that item, and then calls complete to mark the item as completed. The example uses a 10-second lease and a blocking wait with a two-second timeout.",
+    "reference_contexts": [
+      "The worker calls q.lease(lease_secs=10, block=True, timeout=2) to obtain an item. If an item is returned, it decodes and processes it, then calls q.complete(item)."
+    ],
+    "metadata": {
+      "source": "parallel_work_queue.txt",
+      "category": "kubernetes_jobs_parallelism"
+    }
+  },
+  {
+    "id": "k8s_queue_004",
+    "user_input": "What Job parallelism is configured in the Redis work-queue example?",
+    "reference": "The Job manifest sets parallelism to 2, so the example configures up to two worker Pods to run concurrently.",
+    "reference_contexts": [
+      "The example Job manifest contains spec.parallelism: 2."
+    ],
+    "metadata": {
+      "source": "parallel_work_queue.txt",
+      "category": "kubernetes_jobs_parallelism"
+    }
+  },
+  {
+    "id": "k8s_scale_001",
+    "user_input": "What is the difference between Horizontal Pod Autoscaling and Vertical Pod Autoscaling in the supplied guide?",
+    "reference": "The guide describes HPA as changing the number of Pods based on observed metrics, while VPA changes the resources allocated to Pods. Both are presented as autoscaling mechanisms for adapting to workload demand and optimizing resource use.",
+    "reference_contexts": [
+      "Autoscaling adjusts either the number of running Pods or the resources allocated to them. Horizontal Pod Autoscaling automatically scales the number of Pods based on observed CPU utilization or other selected metrics. The guide introduces VPA as the other main autoscaling type, which adjusts resources allocated to Pods."
+    ],
+    "metadata": {
+      "source": "pods_autoscale.html",
+      "category": "kubernetes_autoscaling"
+    }
+  },
+  {
+    "id": "k8s_scale_002",
+    "user_input": "What does the Metrics Server provide for Kubernetes autoscaling?",
+    "reference": "The guide says Metrics Server collects resource-usage metrics from cluster nodes and Pods. Those metrics are needed for autoscaling decisions and can be inspected with kubectl top nodes and kubectl top pods --all-namespaces.",
+    "reference_contexts": [
+      "The Metrics Server collects resource usage metrics from the cluster's nodes and Pods, which are necessary for autoscaling decisions. The guide verifies metrics using kubectl top nodes and kubectl top pods --all-namespaces."
+    ],
+    "metadata": {
+      "source": "pods_autoscale.html",
+      "category": "kubernetes_autoscaling"
+    }
+  },
+  {
+    "id": "k8s_scale_003",
+    "user_input": "How does the HPA decide when to scale the number of Pods?",
+    "reference": "According to the guide, HPA monitors specified metrics such as CPU, memory, or custom metrics, compares current values with predefined thresholds, and increases or decreases the Pod count when the observed values cross those thresholds.",
+    "reference_contexts": [
+      "HPA monitors specified metrics such as CPU usage, memory usage, and custom metrics. It compares current metric values against predefined thresholds. If values exceed thresholds, it increases the number of Pods; when values drop below thresholds, it decreases the number of Pods."
+    ],
+    "metadata": {
+      "source": "pods_autoscale.html",
+      "category": "kubernetes_autoscaling"
+    }
+  },
+  {
+    "id": "k8s_scale_004",
+    "user_input": "What CPU request and limit are used in the HPA Deployment example?",
+    "reference": "The example Nginx container sets a CPU request of 25m and a CPU limit of 200m.",
+    "reference_contexts": [
+      "The HPA Deployment example configures resources.requests.cpu as \"25m\" and resources.limits.cpu as \"200m\" for the Nginx container."
+    ],
+    "metadata": {
+      "source": "pods_autoscale.html",
+      "category": "kubernetes_autoscaling"
+    }
+  },
+  {
+    "id": "k8s_scale_005",
+    "user_input": "Which Kubernetes API version is used for the HPA manifest in the autoscaling guide?",
+    "reference": "The guide's HPA manifest example uses apiVersion autoscaling/v2.",
+    "reference_contexts": [
+      "The HPA example manifest begins with apiVersion: autoscaling/v2."
+    ],
+    "metadata": {
+      "source": "pods_autoscale.html",
+      "category": "kubernetes_autoscaling"
+    }
+  }
+]
