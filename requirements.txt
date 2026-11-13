@@ -1,0 +1,63 @@
+
+# ==============================================================================
+# KubeAssist - Production-Grade Agentic RAG & LLMOps Platform
+# Deployment: Render
+# Primary Embeddings: Jina AI
+# Backup Embeddings: Gemini
+# Vector Database: Qdrant Cloud
+# ==============================================================================
+
+# --- CORE API & WEB FRAMEWORK ---
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+httpx
+streamlit
+numpy
+pytz
+nest-asyncio
+pydantic>=2.0.0
+
+# --- EMBEDDINGS ---
+# Primary: Jina AI Cloud Embeddings (REST API through HTTPX)
+# Backup: Gemini Embeddings
+google-genai
+langchain-google-genai
+
+# --- VECTOR DB & RETRIEVAL ---
+qdrant-client
+flashrank
+
+# --- LANGCHAIN & AGENTIC ORCHESTRATION ---
+langchain
+langgraph
+langchain-groq
+langchain-community
+langchain-openai
+langchain-text-splitters
+
+# --- DATA INGESTION & DOCUMENT PARSING ---
+unstructured
+python-pptx
+python-docx
+pypdf
+beautifulsoup4
+pdfplumber
+
+# --- OBSERVABILITY & DISTRIBUTED TRACING ---
+langsmith
+logfire[fastapi,requests]
+loguru
+
+# --- GUARDRAILS ---
+nemoguardrails
+langchain-nvidia-ai-endpoints
+
+# --- LLM GATEWAY ---
+portkey-ai
+
+# --- EVALUATION ---
+ragas
+deepeval
+langfuse

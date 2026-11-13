@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Large research documents
+Data/noisy_data/*.pdf
+# Large datasets
+Data/
+processed_data/
+
+# Environment and secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Logs and temporary files
+*.log
